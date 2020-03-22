@@ -89,5 +89,5 @@ time = Time.new
 data2value["Month"] = "#{time.month}/#{time.year}"
 
 # Write the data to a JSON file
-hash_string = JSON.dump(data2value)
-File.write("house_data.txt", hash_string)
+hash_string = "\n" + JSON.dump(data2value)
+File.write("house_data.txt", hash_string, mode:"a")
