@@ -7,36 +7,43 @@ require 'json'
 def format_road_name(road_name)
   if road_name.end_with?("Road")
     road_name.gsub!(/Road/, "Rd")
-  elsif road_name.end_with("Avenue")
+  elsif road_name.end_with?("Avenue")
     road_name.gsub!(/Avenue/, "Ave")
-  elsif road_name.end_with("Street")
+  elsif road_name.end_with?("Street")
     road_name.gsub!(/Street/, "St")
-  elsif road_name.end_with("Lane")
+  elsif road_name.end_with?("Lane")
     road_name.gsub!(/Lane/, "Ln")
-  elsif road_name.end_with("Drive")
+  elsif road_name.end_with?("Drive")
     road_name.gsub!(/Drive/, "Dr")
-  elsif road_name.end_with("Circle")
+  elsif road_name.end_with?("Circle")
     road_name.gsub!(/Circle/, "Cir")
-  elsif road_name.end_with("Crescent")
+  elsif road_name.end_with?("Crescent")
     road_name.gsub!(/Crescent/, "Cres")
-  elsif road_name.end_with("Boulevard")
+  elsif road_name.end_with?("Boulevard")
     road_name.gsub!(/Boulevard/, "Blvd")
-  elsif road_name.end_with("Court")
+  elsif road_name.end_with?("Court")
     road_name.gsub!(/Court/, "Ct")
-  elsif road_name.end_with("Terrace")
+  elsif road_name.end_with?("Terrace")
     road_name.gsub!(/Terrace/, "Ter")
-  elsif road_name.end_with("Trail")
+  elsif road_name.end_with?("Trail")
     road_name.gsub!(/Trail/, "Trl")
+  end
   return road_name
+end
 
 def string_to_boolean(s)
   return s.downcase == "true"
+end
   
 # =======================
 #
 #       User Input
 #
 # =======================
+
+
+# A hash that will store the house's data
+data2value = {}
 
 # Get the name of the house in 3 parts
 house_name = ""
@@ -47,9 +54,7 @@ road_name = format_road_name(gets.chop)
 print "Enter the ZIP code: "
 zip_code = gets.chop
 house_name = house_number + " " + road_name + " " + zip_code
-
-# A hash that will store the house's data
-data2value = {}
+data2value["Name"] = house_name
 
 # Prompt for each thing, and add them to the hash
 print "How much does this house cost? "
@@ -82,3 +87,7 @@ data2value["Inside Appearance"] = gets.chop.to_i
 # Get the month and year
 time = Time.new
 data2value["Month"] = "#{time.month}/#{time.year}"
+
+# Write the data to a JSON file
+hash_string = JSON.dump(data2value)
+File.write("house_data.txt", hash_string)
