@@ -55,7 +55,7 @@ end
 
 # Returns the longest string in the hashes for the given field
 def max_length_of_field(field_name, houses)
-  longest = 0
+  longest = field_name.size
   houses.each do |name, data2value|
     cur_length = "#{data2value[field_name]}".size
     if cur_length > longest
@@ -81,6 +81,21 @@ def print_headers(names_list, houses)
     print field_name.rjust(max_length)
     print "|"
   end
+  puts
+end
+
+def print_data(names_list, houses)
+  field2length = get_max_length_hash(names_list, houses)
+  houses.each do |house_name, data2value|
+    print "|"
+    data2value.each do |field, value|
+      if names_list.include? field
+        print "#{value}".rjust(field2length[field])
+        print "|"
+      end
+    end
+    puts
+  end
 end
 
 # ========================
@@ -98,5 +113,6 @@ end
 if choice == 1
   chosen_names = prompt_user_for_fields(field_names)
   print_headers(chosen_names, houses)
+  print_data(chosen_names, houses)
 end
 
