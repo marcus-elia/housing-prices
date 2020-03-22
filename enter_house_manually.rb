@@ -68,7 +68,17 @@ print "How many acres is the lot? "
 data2value["Lot"] = gets.chop.to_f
 print "Is it in a neighborhood? Enter true or false: "
 data2value["Neighborhood"] = string_to_boolean(gets.chop)
+print "Rate the kitchen from 1 to 5: "
+data2value["Kitchen"] = gets.chop.to_i
+print "Rate the yard from 0 to 2: "
+data2value["Yard"] = gets.chop.to_i
+print "Is the house on a lake? Enter true or false: "
+data2value["Lake"] = string_to_boolean(gets.chop)
+print "Rate the outside appearance of the house from 1 to 5: "
+data2value["Outside Appearance"] = gets.chop.to_i
+print "Rate the inside appearance of the house from 1 to 5: "
+data2value["Inside Appearance"] = gets.chop.to_i
 
-
-
-
+# Get the month and year
+time = Time.new
+data2value["Month"] = "#{time.month}/#{time.year}"
